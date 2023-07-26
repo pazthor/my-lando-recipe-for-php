@@ -1,0 +1,31 @@
+name: laravel-template
+recipe: laravel
+config:
+  webroot: public
+  php: '8.1'
+  via: nginx
+  database: mysql
+
+services:
+  database:
+      portforward: 3333 # fija el puerto
+
+tooling:
+
+  test:
+    service: appserver
+    cmd: php --version
+    description: Ejecuta todos los tests!!
+
+  build:
+    description: Manually invoke all your build steps
+    # example how execute many commands
+    cmd:
+      - appserver: echo "To-Do  "
+      - appserver: echo "execute many script"
+  # exmaple execute one command
+  linter:
+    service: appserver
+    description: linter
+    cmd: ./vendor/bin/pint
+
